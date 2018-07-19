@@ -1,70 +1,41 @@
 const express = require('express');
+const sql = require('mssql');
 
 const bookRouter = express.Router();
 
 function router(nav) {
-  const books = [
-    {
-      title: 'Mort',
-      genre: 'Fantasy',
-      author: 'Terry Pratchett',
-      read: true
-    },
-    {
-      title: 'Papillon',
-      genre: 'Crime',
-      author: 'Henri Charrierre',
-      read: true
-    },
-    {
-      title: 'The Time Machine',
-      genre: 'Science Fiction',
-      author: 'H. G. Wells',
-      read: false
-    },
-    {
-      title: 'War and Peace',
-      genre: 'Historical Fiction',
-      author: 'Lev Nikolayevich Tolstoy',
-      read: false
-    },
-    {
-      title: 'Les Miserables',
-      genre: 'Historical Fiction',
-      author: 'Victor Hugo',
-      read: false
-    },
-    {
-      title: 'Thud',
-      genre: 'Fantasy',
-      author: 'Terry Pratchett',
-      read: true
-    },
-  ];
-
   bookRouter.route('/')
     .get((req, res) => {
-      res.render(
-        'bookListView',
-        {
-          nav,
-          title: 'Library',
-          books
-        }
-      );
+      (async function query() {
+        const request = new sql.Request();
+        const { recordset } = await request.query('select * from books');
+        res.render(
+          'bookListView',
+          {
+            nav,
+            title: 'Library',
+            books: recordset
+          }
+        );
+      }());
     });
 
   bookRouter.route('/:id')
     .get((req, res) => {
-      const { id } = req.params;
-      res.render(
-        'bookView',
-        {
-          nav,
-          title: 'Library',
-          book: books[id]
-        }
-      );
+      (async function query() {
+        const { id } = req.params;
+        const request = new sql.Request();
+        const { recordset } = await request.input('id', sql.Int, id)
+          .query('select * from books where id = @id');
+        res.render(
+          'bookView',
+          {
+            nav,
+            title: 'Library',
+            book: recordset[0]
+          }
+        );
+      }());
     });
 
   return bookRouter;
