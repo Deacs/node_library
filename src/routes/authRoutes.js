@@ -31,7 +31,7 @@ function router(nav) {
         }
       }());
     });
-  authRouter.route('/signIn')
+  authRouter.route('/signin')
     .get((req, res) => {
       res.render('signin', {
         nav,
@@ -47,11 +47,7 @@ function router(nav) {
       res.json(req.user);
     });
 
-  
-
-  
-  
-    return authRouter;
+  return authRouter;
 }
 
 module.exports = router;
