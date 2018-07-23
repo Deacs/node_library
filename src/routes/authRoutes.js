@@ -42,6 +42,11 @@ function router(nav) {
       successRedirect: '/auth/profile',
       failureRedirect: '/'
     }));
+  authRouter.route('/logout')
+    .get((req, res) => {
+      req.logout();
+      res.redirect('/auth/signin');
+    });
   authRouter.route('/profile')
     .all((req, res, next) => {
       if (req.user) {
