@@ -9,36 +9,42 @@ const books = [
     title: 'Mort',
     genre: 'Fantasy',
     author: 'Terry Pratchett',
+    bookId: 386372,
     read: true
   },
   {
     title: 'Papillon',
     genre: 'Crime',
     author: 'Henri Charrierre',
+    bookId: 6882,
     read: true
   },
   {
     title: 'The Time Machine',
     genre: 'Science Fiction',
     author: 'H. G. Wells',
+    bookId: 2493,
     read: false
   },
   {
     title: 'War and Peace',
     genre: 'Historical Fiction',
     author: 'Lev Nikolayevich Tolstoy',
+    bookId: 656,
     read: false
   },
   {
     title: 'Les Miserables',
     genre: 'Historical Fiction',
     author: 'Victor Hugo',
+    bookId: 24280,
     read: false
   },
   {
-    title: 'Thud',
+    title: 'Thud!',
     genre: 'Fantasy',
     author: 'Terry Pratchett',
+    bookId: 62530,
     read: true
   },
 ];
