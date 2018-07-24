@@ -1,13 +1,17 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
-const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
 const authController = require('../controllers/authController');
 
 const authRouter = express.Router();
 
 function router(nav) {
-  const { signUp, getSignIn, logout, getProfile, middleware } = authController(nav);
+  const {
+    signUp,
+    getSignIn,
+    logout,
+    getProfile,
+    middleware
+  } = authController(nav);
   authRouter.route('/signUp')
     .post(signUp);
   authRouter.route('/signin')
